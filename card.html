@@ -28,5 +28,39 @@
         <p>Engineer</p>
     </div>
     </div>
+    
+    <button onclick="toggleUser()">click</button>
+    <script>
+        const userOne={
+            name : 'John Doe',
+            designation : 'CSE Engineer',
+            image : "/cs engineer.jpg"
+        }
+        const userTwo={
+            name : 'Jane Doe',
+            designation : 'Civil Engineer',
+            image : "/engineer.jpg"
+        }
+        let currentIsJohn =true;
+        let displayUser ={};
+        let userTitle=document.getElementById("userTitle")
+        let userImage = document.getElementById("userImage");
+        let userDesignation=document.getElementById*"userDesignation";
+        let toggleUser=function(){
+            if(currentIsJohn){
+                displayUser=userTwo;
+                currentIsJohn=false;
+            }
+            else{
+                displayUser=userOne;
+                currentIsJohn = true;
+            }
+       
+        userTitle.innerHTML = displayUser.name;
+        userDesignation.innerHTML = displayUser.designation;
+        userImage.src = displayUser.image;
+        }
+        
+    </script>
 </body>
 </html>

@@ -5,8 +5,12 @@ const app = express();
 const port = process.env.PORT || 5010;
 const userLib= require("./backend/libs/userlib");
 mongoose.set('strictQuery', true);
+app.use(express.static(";ublic"));
+app.get("/card", function(req, res){
+	res.sendFile(__dirname+"/card .html");
+});
 app.get("/", function(req, res){
-	res.sendFile(__dirname+"/Resume.html");
+	res.sendFile(__dirname+"/index.html");
 });
 mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	if(err)
@@ -16,15 +20,25 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	else
 	{
 		console.log("DB Connected");
-		//todo: donot create a user if atleast
-		userLib.createFirstUser(function(err,res){
+		
+		//userLib.createFirstUser(function(err,res){
+		//	if(err)
+		//	{
+		//		//console.error(err);
+		//	}
+		//	else
+		//	{
+		//		console.log(res);
+		//	}
+		//});
+		userLib.updateUser(function(err,result){
 			if(err)
 			{
-				//console.error(err);
+				console.log(err);
 			}
 			else
 			{
-				console.log(res);
+				console.log(result);
 			}
 		});
 		app.listen(port, function(){
