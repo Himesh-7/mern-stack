@@ -19,6 +19,9 @@ app.get("/card", function(req, res){
 app.get("/", function(req, res){
 	res.sendFile(__dirname+"/index.html");
 });
+app.get("/Resume", function(req, res){
+	res.sendFile(__dirname+"/Resume.html");
+});
 mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	if(err)
 	{
