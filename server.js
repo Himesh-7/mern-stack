@@ -52,7 +52,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, function(err) {
 		// 		console.log(result);
 		// 	}
 		// });
-		/*userLib.deleteUser("Saivenkat",function(err,result){
+		/*userLib.deleteUser("Himesh",function(err,result){
 			if(err){
 				console.error(err);
 			}
@@ -60,7 +60,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, function(err) {
 				console.log(result);
 			}
 		});*/
-		//   userLib.getUserByFilter({userName: "saivenkat"}, function(err,result){
+		//   userLib.getUserByFilter({userName: "himesh_7"}, function(err,result){
 		// 	if(err){
 		//  		console.error(err);
 		// 	}
