@@ -3,9 +3,16 @@ const mongoose=require("mongoose");
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5010;
+const options = {
+    extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
+    index: ['index.html'],  
+}
+app.use(express.static("public", options));
 const userLib= require("./backend/libs/userlib");
+
+
 mongoose.set('strictQuery', true);
-app.use(express.static(";ublic"));
+
 app.get("/card", function(req, res){
 	res.sendFile(__dirname+"/card .html");
 });
