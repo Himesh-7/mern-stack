@@ -1,5 +1,5 @@
 require('dotenv').config();
-const userLib = require("./backend/lib/userLib");
+const userLib = require("./backend/libs/userlib");
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -68,14 +68,14 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, function(err) {
 		// 		console.log(result);
 		// 	}
 		//  });
-		 userLib.getAllUsers(function(err,result){
-		 	if(err){
-		 		console.error(err);
-		 	}
-		 	else{
-		 		console.log(result);
-		 	}
-		 });
+		//  userLib.getAllUsers(function(err,result){
+		//  	if(err){
+		//  		console.error(err);
+		//  	}
+		//  	else{
+		//  		console.log(result);
+		//  	}
+		//  });
 
 		app.listen(port, function(){
 			console.log("Server running on http://localhost:"+port);
