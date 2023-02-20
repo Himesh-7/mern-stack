@@ -7,9 +7,3 @@ const userSchema=new mongoose.Schema({
     isDeleted:{type:Boolean,default:false}
 });
 module.exports=mongoose.model("user",userSchema);
-const userSchema1=new mongoose.Schema({
-    titel:{type:String},
-    isCompleted:{type:Boolean},
-    isDeleted:{type:Boolean},
-    createdAt:{type:Date}
-});

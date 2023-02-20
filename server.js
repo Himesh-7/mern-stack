@@ -9,9 +9,14 @@ const options = {
     index: ['index.html'],  
 }
 app.use(express.static("public", options));
-
+app.use(express.static("frontend"));
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/frontend/html/index.html');
+});
 // app.use(express.static(__dirname + '/public'));
-
+app.get('/weather', function(req, res) {
+    res.sendFile(__dirname + '/weather.html');
+});
 app.get('/card', function(req, res) {
     res.sendFile(__dirname + '/card.html');
 });
