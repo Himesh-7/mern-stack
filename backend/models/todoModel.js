@@ -1,8 +1,10 @@
-const mongoose=require("mongoose");
-const userSchema1=new mongoose.Schema({
-    titel:{type:String},
-    isCompleted:{type:Boolean},
-    isDeleted:{type:Boolean},
-    createdAt:{type:Date}
+const mongoose = require("mongoose");
+
+const todoSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    isCompleted: {type: Boolean, default: false},
+    isDeleted: {type: Boolean, default: false},
+    createdAt: {type: Date, default: Date.now}
 });
-module.exports=mongoose.model("user",userSchema1); 
+
+module.exports = mongoose.model("todo",todoSchema);

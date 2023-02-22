@@ -1,19 +1,46 @@
 require('dotenv').config();
 const userLib = require("./backend/libs/userlib");
+const todoLib = require("./backend/libs/todolib");
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const port = process.env.PORT || 5030;
+const port = process.env.PORT || 5010;
 const options = {
     extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
     index: ['index.html'],  
 }
 app.use(express.static("public", options));
-app.use(express.static("frontend"));
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/frontend/html/index.html');
+app.use(express.static("frontend1"));
+app.use(express.json());
+// app.get('/', function(req, res) {
+//     res.sendFile(__dirname + '/frontend/html/index.html');
+// });
+app.get("/api/todos",function(req,res){
+	todoLib.getAllTodos(function(err,todos){
+		if(err){
+			res.json({status: "error",message:"err",data : null});
+		}
+		else{
+			res.json({status:"success",data:todos});
+		}
+	});
+});
+app.post("/api/todos",function(req,res){
+	const todo=req.body;
+	todoLib.createTodo(todo,function(err,dbtodo){
+		if(err)
+		{
+			res.json({status:"error",data:null});
+		}
+		else{
+			res.json({status:"success",data:dbtodo});
+		}
+	});
 });
 // app.use(express.static(__dirname + '/public'));
+app.get('/todo',function(req,res){
+	res.sendFile(__dirname+'/frontend1/html/todo.html');
+});
 app.get('/weather', function(req, res) {
     res.sendFile(__dirname + '/weather.html');
 });
