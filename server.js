@@ -100,7 +100,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
 	}
 	else{
 		console.log("DB Connected");
-		// todoLib.createTodo({title: "nithin vp"}, function(err,res){
+		// todoLib.createTodo({title: "Himesh"}, function(err,res){
 		// 	if(err){
 		// 		console.error(err);
 		// 	}
@@ -116,7 +116,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
 		// 		console.log(res);
 		// 	}
 		// });
-		// todoLib.getSingleTodoById({title: "nithin vp"}, function(err,res){
+		// todoLib.getSingleTodoById({title: "Himesh"}, function(err,res){
 		// 	if(err) console.error(err);
 		// 	else console.log(res);
 		// });
@@ -140,7 +140,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
 		// 		console.log(res);
 		// 	}
 		// });
-		// userLib.createUser({userName: "beingzero", yearOfGraduation: 2025},function(err,result){
+		// userLib.createUser({userName: "beingzero", yearOfGraduation: 2024},function(err,result){
 		// 	if(err){
 		// 		console.error(err);
 		// 	}
@@ -156,15 +156,15 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
 		// 		console.log(result);
 		// 	}
 		// });
-		// userLib.deleteUser("Srikanth Reddy",function(err,result){
-		// 	if(err){
-		// 		console.error(err);
-		// 	}
-		// 	else{
-		// 		console.log(result);
-		// 	}
-		// });
-		// userLib.getUserByFilter({userName: "Srikanth Reddy"}, function(err,result){
+		userLib.deleteUser("Himesh",function(err,result){
+			if(err){
+				console.error(err);
+			}
+			else{
+				console.log(result);
+			}
+		});
+		// userLib.getUserByFilter({userName: "Himesh"}, function(err,result){
 		// 	if(err){
 		// 		console.error(err);
 		// 	}
