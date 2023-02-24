@@ -1,6 +1,6 @@
 //const userModel = require("../models/userModel");
 
-import {userModel} from "../models/userModel.js";
+import userModel from "../models/userModel.js";
 export async function getAllUsers (callback){
     try{
         var users = await userModel.find({isDeleted: false});
