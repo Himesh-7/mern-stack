@@ -1,16 +1,16 @@
-//require("dotenv").config();
-import {config} from "dotenv";
-config();
-import mongoose from "mongoose";
-import todoModel from "./backend/models/todoModel.js";
-import * as userLib from "./backend/libs/userLib.js"
-import * as todoLib from "./backend/libs/todoLib.js";
+require("dotenv").config();
+//import {config} from "dotenv";
+//config();
+//import mongoose from "mongoose";
+//import todoModel from "./backend/models/todoModel.js";
+//import * as userLib from "./backend/libs/userLib.js"
+//import * as todoLib from "./backend/libs/todoLib.js";
 
-//const userLib = require("./backend/libs/userLib");
-//const todoLib = require("./backend/libs/todoLib");
-//const mongoose = require("mongoose");
-//const express = require('express');
-import express from "express";
+const userLib = require("./backend/libs/userLib");
+const todoLib = require("./backend/libs/todoLib");
+const mongoose = require("mongoose");
+const express = require('express');
+//import express from "express";
 //const { request } = require("express");
 const app = express(); 
 const port = process.env.PORT || 5010;
