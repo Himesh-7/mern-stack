@@ -1,73 +1,145 @@
-require('dotenv').config();
-const userLib = require("./backend/libs/userlib");
-const todoLib = require("./backend/libs/todolib");
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
+//require("dotenv").config();
+import {config} from "dotenv";
+config();
+import mongoose from "mongoose";
+import todoModel from "./backend/models/todoModel.js";
+import * as userLib from "./backend/libs/userLib.js"
+import * as todoLib from "./backend/libs/todoLib.js";
+
+//const userLib = require("./backend/libs/userLib");
+//const todoLib = require("./backend/libs/todoLib");
+//const mongoose = require("mongoose");
+//const express = require('express');
+import express from "express";
+//const { request } = require("express");
+const app = express(); 
 const port = process.env.PORT || 5010;
 const options = {
-    extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
-    index: ['index.html'],  
+	extensions:['htm','html','css','js','ico','jpg','jpeg','png','svg','pdf'],
+	index:['index.html'],
 }
-app.use(express.static("public", options));
+
 app.use(express.static("frontend1"));
 app.use(express.json());
-// app.get('/', function(req, res) {
-//     res.sendFile(__dirname + '/frontend/html/index.html');
-// });
+app.use(express.static("public",options));
+
 app.get("/api/todos",function(req,res){
-	todoLib.getAllTodos(function(err,todos){
+	todoLib.getAllTodos(function(err, todos){
 		if(err){
-			res.json({status: "error",message:"err",data : null});
+			res.json({status: "error", message: err, data: null});
 		}
 		else{
-			res.json({status:"success",data:todos});
+			res.json({status: "success", data: todos});
 		}
 	});
 });
-app.post("/api/todos",function(req,res){
-	const todo=req.body;
-	todoLib.createTodo(todo,function(err,dbtodo){
-		if(err)
-		{
-			res.json({status:"error",data:null});
+
+app.post("/api/todos", function(req, res){
+	const todo = req.body;
+	todoLib.createTodo(todo, function(err, dbtodo){
+		if(err){
+			res.json({status: "error", message: err, data: null});
 		}
 		else{
-			res.json({status:"success",data:dbtodo});
+			res.json({status: "success", data: dbtodo});
 		}
 	});
 });
-// app.use(express.static(__dirname + '/public'));
+
+app.put(("/api/todos/:todoid"),function(req,res){
+	const todo = req.body;
+	const todoid = req.params.todoid;
+	todoLib.updateTodoById(todoid, todo, function(err, dbtodo){
+		if(err){
+			res.json({status: "error", message: err, data: null});
+		}
+		else{
+			res.json({status: "success", data: dbtodo});
+		}
+	});
+});
+
+app.delete(("/api/todos/:todoid"),function(req,res){
+	const todoid = req.params.todoid;
+	todoLib.deleteTodoById(todoid, function(err,dbtodo){
+		if(err){
+			res.json({status: "error", message: err, data: null});
+		}
+		else{
+			res.json({status: "success", data: dbtodo});
+		}
+	});
+});
 app.get('/todo',function(req,res){
-	res.sendFile(__dirname+'/frontend1/html/todo.html');
+	res.sendFile(process.cwd()+'/frontend1/html/todo.html');
 });
-app.get('/weather', function(req, res) {
-    res.sendFile(__dirname + '/weather.html');
+app.get("/Resume", function(req, res){
+	res.sendFile(process.cwd()+"/Resume.html");
 });
-app.get('/card', function(req, res) {
-    res.sendFile(__dirname + '/card.html');
+
+app.get("/index", function(req, res){
+	res.sendFile(process.cwd()+"/index.html");
 });
-app.get('/index', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+
+app.get("/card", function(req, res){
+	res.sendFile(process.cwd()+"/card.html");
 });
-app.get('/Resume', function(req, res) {
-    res.sendFile(__dirname + '/Resume.html');
+app.get("/weather", function(req, res){
+	res.sendFile(process.cwd()+"/weather.html");
 });
+// app.get("/todolist", function(req, res){
+// 	res.sendFile(__dirname+"/frontend/html/todolist.html");
+// });
+// app.get("/about", function(req, res){
+// 	res.sendFile(__dirname+"/frontend/html/about.html");
+// });
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, function(err) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log('Connected to database');
-        // TODO : donot create a user if atleast 1 user exist in the table
-        //    userLib.createFirstUser(function(err,result){
-		//  	if(err){
-		//  		// console.error(err);
-		//  	}
-		//  	else{
-		//  		console.log(result);
-		//  	}
-		//  });
+mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
+	if(err){
+		console.error(err);
+	}
+	else{
+		console.log("DB Connected");
+		// todoLib.createTodo({title: "nithin vp"}, function(err,res){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(res);
+		// 	}
+		// });
+		// todoLib.getAllTodos(function(err,res){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(res);
+		// 	}
+		// });
+		// todoLib.getSingleTodoById({title: "nithin vp"}, function(err,res){
+		// 	if(err) console.error(err);
+		// 	else console.log(res);
+		// });
+
+		// todoLib.getTodosByQuery({isCompleted: false, isDeleted: false}, function(err,res){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(res);
+		// 	}
+		// });
+		// todoLib.updateTodoById()
+
+		// TODO: donot create user if atleast 1 user exist int the table
+		// userLib.createFirstUser(function(err,res){
+		// 	if(err){
+		// 		// console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(res);
+		// 	}
+		// });
 		// userLib.createUser({userName: "beingzero", yearOfGraduation: 2025},function(err,result){
 		// 	if(err){
 		// 		console.error(err);
@@ -84,30 +156,30 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, function(err) {
 		// 		console.log(result);
 		// 	}
 		// });
-		/*userLib.deleteUser("Himesh",function(err,result){
-			if(err){
-				console.error(err);
-			}
-			else{
-				console.log(result);
-			}
-		});*/
-		//   userLib.getUserByFilter({userName: "himesh_7"}, function(err,result){
+		// userLib.deleteUser("Srikanth Reddy",function(err,result){
 		// 	if(err){
-		//  		console.error(err);
+		// 		console.error(err);
 		// 	}
-		//  	else{
+		// 	else{
 		// 		console.log(result);
 		// 	}
-		//  });
-		//  userLib.getAllUsers(function(err,result){
-		//  	if(err){
-		//  		console.error(err);
-		//  	}
-		//  	else{
-		//  		console.log(result);
-		//  	}
-		//  });
+		// });
+		// userLib.getUserByFilter({userName: "Srikanth Reddy"}, function(err,result){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(result);
+		// 	}
+		// });
+		// userLib.getAllUsers(function(err,result){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(result);
+		// 	}
+		// });
 
 		app.listen(port, function(){
 			console.log("Server running on http://localhost:"+port);
