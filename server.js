@@ -156,14 +156,14 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function (err){
 		// 		console.log(result);
 		// 	}
 		// });
-		userLib.deleteUser("Himesh",function(err,result){
-			if(err){
-				console.error(err);
-			}
-			else{
-				console.log(result);
-			}
-		});
+		// userLib.deleteUser("Himesh",function(err,result){
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// 	else{
+		// 		console.log(result);
+		// 	}
+		// });
 		// userLib.getUserByFilter({userName: "Himesh"}, function(err,result){
 		// 	if(err){
 		// 		console.error(err);
