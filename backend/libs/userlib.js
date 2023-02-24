@@ -1,4 +1,5 @@
 //const userModel = require("../models/userModel");
+
 import {userModel} from "../models/userModel.js";
 export async function getAllUsers (callback){
     try{

@@ -57,7 +57,6 @@ export const updateTodoById = async function(id,data,callback){
         var todo = {
             _id: new mongoose.Types.ObjectId(id),
         }
-        
         var result = await todoModel.updateOne(todo,data);
         callback(null,result);
     }
